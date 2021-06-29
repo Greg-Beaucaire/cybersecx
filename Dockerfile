@@ -1,4 +1,4 @@
-# Damn Vulnerable NodeJS Application
+# Vulnerable Node.js App
 
 FROM node:carbon
 LABEL MAINTAINER "Subash SN"

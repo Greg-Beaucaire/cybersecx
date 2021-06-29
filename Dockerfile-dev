@@ -1,5 +1,4 @@
-# Damn Vulnerable NodeJS Application
-# https://github.com/appsecco/dvna
+#  Vulnerable Node.js App
 
 FROM node:carbon
 LABEL MAINTAINER "Subash SN"
