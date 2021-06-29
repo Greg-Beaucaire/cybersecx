@@ -1,5 +1,4 @@
 var db = require('../models')
-var bCrypt = require('bcryptjs')
 var md5 = require('md5')
 
 module.exports.isAuthenticated = function (req, res, next) {
@@ -76,7 +75,7 @@ module.exports.resetPwSubmit = function (req, res) {
 			}).then(user => {
 				if (user) {
 					if (req.body.token == md5(req.body.login)) {
-						user.password = bCrypt.hashSync(req.body.password, bCrypt.genSaltSync(10), null)
+						user.password = md5(req.body.password)
 						user.save().then(function () {
 							req.flash('success', "Passowrd successfully reset")
 							res.redirect('/login')

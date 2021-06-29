@@ -1,6 +1,7 @@
+const md5 = require('md5');
 var db = require('../models')
 var LocalStrategy = require('passport-local').Strategy
-var bCrypt = require('bcryptjs')
+
 
 
 module.exports = function (passport) {
@@ -44,7 +45,7 @@ module.exports = function (passport) {
         }))
 
     var isValidPassword = function (user, password) {
-        return bCrypt.compareSync(password, user.password);
+        return md5(password)==user.password;
     }
 
     passport.use('signup', new LocalStrategy({
@@ -83,7 +84,7 @@ module.exports = function (passport) {
         }));
 
     var createHash = function (password) {
-        return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+        return md5(password);
     }
 
 }
