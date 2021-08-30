@@ -1,7 +1,7 @@
 {
-    "MYSQL_USER": "toto",
-    "MYSQL_DATABASE": "toto",
-    "MYSQL_PASSWORD": "toto",
+    "MYSQL_USER": "root",
+    "MYSQL_DATABASE": "dvna",
+    "MYSQL_PASSWORD": "prout",
     "MYSQL_HOST": "127.0.0.1",
     "MYSQL_PORT": "3306"
 }

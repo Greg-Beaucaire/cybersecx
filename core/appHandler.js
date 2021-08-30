@@ -7,32 +7,32 @@ var serialize = require("node-serialize")
 const Op = db.Sequelize.Op
 
 module.exports.userSearch = function (req, res) {
-	var query = "SELECT name,id FROM Users WHERE login='" + req.body.login + "'";
-	db.sequelize.query(query, {
-		model: db.User
-	}).then(user => {
-		if (user.length) {
-			var output = {
-				user: {
-					name: user[0].name,
-					id: user[0].id
-				}
-			}
-			res.render('app/usersearch', {
-				output: output
-			})
-		} else {
-			req.flash('warning', 'User not found')
-			res.render('app/usersearch', {
-				output: null
-			})
-		}
-	}).catch(err => {
-		req.flash('danger', 'Internal Error')
-		res.render('app/usersearch', {
-			output: null
-		})
-	})
+  // Nous pouvons ici corriger la faille en utilisant les outils de désinfection ainsi que les méthodes présents dans sequelize
+  if (vh.vCode(req.body.login)){
+    db.User.find({where:{'login':req.body.login}}).then(user => {
+      if (user) {
+        var output = {
+          user: {
+            name: user[0].name,
+            id: user[0].id
+          }
+        }
+        res.render('app/usersearch', {
+          output: output
+        })
+      } else {
+        req.flash('warning', 'User not found')
+        res.render('app/usersearch', {
+          output: null
+        })
+      }
+    }).catch(err => {
+      req.flash('danger', 'Internal Error')
+      res.render('app/usersearch', {
+        output: null
+      })
+    })
+  }
 }
 
 module.exports.ping = function (req, res) {
