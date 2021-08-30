@@ -1,4 +1,5 @@
 var db = require('../models')
+var vh = require('validation-handler')
 const md5 = require('md5');
 const exec = require('child_process').exec;
 var mathjs = require('mathjs')
@@ -7,7 +8,7 @@ var serialize = require("node-serialize")
 const Op = db.Sequelize.Op
 
 module.exports.userSearch = function (req, res) {
-  // Nous pouvons ici corriger la faille en utilisant les outils de désinfection ainsi que les méthodes présents dans sequelize
+  // Nous pouvons ici corriger la faille en utilisant les outils de désinfection ainsi que les meé présent dans sequelize
   if (vh.vCode(req.body.login)){
     db.User.find({where:{'login':req.body.login}}).then(user => {
       if (user) {
